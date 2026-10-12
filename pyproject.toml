@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "contractradius"
+version = "0.1.1"
+description = "Find the API changes that actually affect your frontend, not just the ones that look dangerous in an OpenAPI diff."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [{ name = "Bindu" }]
+keywords = ["openapi", "api", "breaking-changes", "typescript", "static-analysis", "ci"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Quality Assurance",
+  "Typing :: Typed",
+]
+dependencies = [
+  "pydantic>=2.5",
+  "pyyaml>=6.0",
+  "tree-sitter>=0.22",
+  "tree-sitter-typescript>=0.21",
+  "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.4", "mypy>=1.9", "types-PyYAML"]
+
+[project.scripts]
+contractradius = "contractradius.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/Bindu2006/ContractRadius"
+Repository = "https://github.com/Bindu2006/ContractRadius"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/contractradius"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
